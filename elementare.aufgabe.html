@@ -1,0 +1,239 @@
+// Erstelle ein Formular mit zwei Eingabefeldern, einem für den Namen und einem für die E-Mail-Adresse. Wenn der Nutzer das Formular abschickt, soll eine Erfolgsmeldung angezeigt werden.
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Formular mit Erfolgsmeldung</title>
+</head>
+<body>
+
+<h2>Formular</h2>
+
+<form id="myForm">
+  <label for="name">Name:</label>
+  <input type="text" id="name" name="name" required><br><br>
+
+  <label for="email">E-Mail:</label>
+  <input type="email" id="email" name="email" required><br><br>
+
+  <input type="submit" value="Abschicken">
+</form>
+
+<p id="successMessage" style="display: none;">Formular erfolgreich abgeschickt!</p>
+
+<script src="script.js"></script>
+</body>
+</html>
+
+// code in php für eingabefelder
+<?php
+if ($_SERVER["REQUEST_METHOD"] == "POST") {
+    $name = $_POST['name'];
+    $email = $_POST['email'];
+    
+    // Hier könntest du die Daten in eine Datenbank einfügen oder andere Aktionen durchführen
+?>
+
+    <h2>Formular erfolgreich abgeschickt!</h2>
+    <p>Name: <?php echo $name; ?></p>
+    <p>E-Mail: <?php echo $email; ?></p>
+
+<?php
+} else {
+    // Falls das Formular direkt aufgerufen wird, ohne abgeschickt zu werden
+    echo "<h2>Ungültige Anfrage</h2>";
+}
+?>
+
+_______________________________________________________________________________________________________________
+// Passe das Aussehen einer Website an, indem du die Schriftart der Überschrift auf "Arial" und die Schriftgröße auf 20 Pixel änderst.
+
+// css alt
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f4f4f4;
+    padding: 20px;
+  }
+  
+  form {
+    background-color: #fff;
+    padding: 20px;
+    width: 300px;
+    border-radius: 5px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  }
+  
+  label,
+  input[type="text"],
+  input[type="email"],
+  input[type="submit"] {
+    display: block;
+    margin-bottom: 10px;
+  }
+  
+  input[type="text"],
+  input[type="email"],
+  input[type="submit"] {
+    width: calc(100% - 20px);
+    padding: 8px;
+    border-radius: 3px;
+    border: 1px solid #ccc;
+  }
+  
+  input[type="submit"] {
+    background-color: #4CAF50;
+    color: white;
+    cursor: pointer;
+  }
+
+  // css angepasst mit änderung
+  body {
+    font-family: Arial, sans-serif;
+    /* Setzt die Standardschriftart für den gesamten Text im Dokument */
+  }
+  
+  .custom-heading {
+    font-family: Arial, sans-serif;
+    /* Ändert die Schriftart der Überschrift */
+    font-size: 20px;
+    /* Ändert die Schriftgröße der Überschrift */
+  }
+  
+  // Sende Daten aus einem Formular an eine Datenbank. Das Formular soll den Namen, die E-Mail-Adresse und das Geburtsdatum des Nutzers abfragen. Die Daten sollen in eine Datenbank mit dem Namen "benutzer" gespeichert werden.
+ // html
+ <!DOCTYPE html>
+<html>
+<head>
+  <title>Formular zur Datenspeicherung</title>
+  <link rel="stylesheet" type="text/css" href="styles.css">
+</head>
+<body>
+
+<h2>Benutzerdaten eingeben:</h2>
+
+<form action="submit.php" method="post">
+  <label for="name">Name:</label>
+  <input type="text" id="name" name="name" required><br><br>
+
+  <label for="email">E-Mail:</label>
+  <input type="email" id="email" name="email" required><br><br>
+
+  <label for="birthdate">Geburtsdatum:</label>
+  <input type="date" id="birthdate" name="birthdate" required><br><br>
+
+  <input type="submit" value="Daten speichern">
+</form>
+
+</body>
+</html>
+
+// css
+/* Hier kannst du das Styling deiner Formularelemente anpassen */
+body {
+  font-family: Arial, sans-serif;
+  /* Setzt die Standardschriftart für den gesamten Text im Dokument */
+}
+
+form {
+  width: 300px;
+  margin: 0 auto;
+  /* Zentriert das Formular auf der Seite */
+}
+
+input[type="text"],
+input[type="email"],
+input[type="date"],
+input[type="submit"] {
+  width: 100%;
+  padding: 8px;
+  margin-bottom: 10px;
+  border-radius: 4px;
+  border: 1px solid #ccc;
+  box-sizing: border-box;
+}
+
+input[type="submit"] {
+  background-color: #4CAF50;
+  color: white;
+  cursor: pointer;
+}
+
+// php
+<?php
+$servername = "localhost"; // Hostname (üblicherweise "localhost")
+$username = "dein_username"; // Dein Datenbank-Benutzername
+$password = "dein_passwort"; // Dein Datenbank-Passwort
+$dbname = "benutzer"; // Der Name deiner Datenbank
+
+// Verbindung herstellen
+$conn = new mysqli($servername, $username, $password, $dbname);
+
+// Überprüfen der Verbindung
+if ($conn->connect_error) {
+    die("Verbindung fehlgeschlagen: " . $conn->connect_error);
+}
+
+// Formulardaten erhalten und in Variablen speichern
+$name = $_POST['name'];
+$email = $_POST['email'];
+$birthdate = $_POST['birthdate'];
+
+// SQL-Query für das Einfügen der Daten
+$sql = "INSERT INTO benutzer (name, email, birthdate) VALUES ('$name', '$email', '$birthdate')";
+
+if ($conn->query($sql) === TRUE) {
+    echo "Daten erfolgreich gespeichert!";
+} else {
+    echo "Error: " . $sql . "<br>" . $conn->error;
+}
+
+// Verbindung schließen
+$conn->close();
+?>
+
+// Erstelle ein JavaScript-Skript, das ein Bild animiert. Das Bild soll sich nach links und rechts bewegen.
+// html
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Bildanimation mit JavaScript</title>
+  <style>
+    #movingImage {
+      position: absolute;
+      top: 50px;
+      left: 50px;
+      transition: left 1s ease-in-out; /* Animationseffekt */
+    }
+  </style>
+</head>
+<body>
+
+<img id="movingImage" src="bildquelle.jpg" alt="Bild">
+
+<script src="script.js"></script>
+</body>
+</html>
+
+// js
+const image = document.getElementById('movingImage');
+
+let moveRight = true; // Variable, um die Bewegungsrichtung zu steuern
+let currentPosition = 50; // Startposition des Bildes
+
+function moveImage() {
+  if (moveRight) {
+    currentPosition += 5; // Bewegung nach rechts um 5 Pixel
+    if (currentPosition >= 300) { // Begrenzung der Bewegung nach rechts
+      moveRight = false; // Richtung umkehren
+    }
+  } else {
+    currentPosition -= 5; // Bewegung nach links um 5 Pixel
+    if (currentPosition <= 50) { // Begrenzung der Bewegung nach links
+      moveRight = true; // Richtung umkehren
+    }
+  }
+  image.style.left = currentPosition + 'px'; // Setzen der neuen Position des Bildes
+}
+
+setInterval(moveImage, 100); // Funktion moveImage alle 100 Millisekunden aufrufen
+
+_______________________________________________________________________________________________________________
